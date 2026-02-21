@@ -1,21 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Register</title>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <style>
+    body {
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+      width: 350px;
+      text-align: center;
+    }
+    h2 {
+      color: #1e3a8a;
+      margin-bottom: 25px;
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    button {
+      width: 95%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #10b981;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #059669;
+    }
+    .link {
+      margin-top: 15px;
+      display: block;
+      font-size: 0.9em;
+      color: #1e3a8a;
+      text-decoration: none;
+    }
+    .link:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-<h2>Create Account</h2>
+<div class="container">
+  <h2>Create Account</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="register()">Sign Up</button>
+  <a href="login.html" class="link">Already have an account? Login</a>
+</div>
 
-<input type="email" id="email" placeholder="Email"><br><br>
-<input type="password" id="password" placeholder="Password"><br><br>
-
-<button onclick="register()">Register</button>
-
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyCQgHcWfkCid4Iv_ASrC5U7m20oJ7IdotE",
@@ -26,19 +79,16 @@ const firebaseConfig = {
   appId: "1:604127846186:web:11629f1481d858679ac853",
   measurementId: "G-GT5Q49H071"
 };
-
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 function register() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  if (!email || !password) { alert("Enter both email and password"); return; }
 
   auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      alert("Account created!");
-      window.location = "login.html";
-    })
+    .then(() => { window.location = "login.html"; })
     .catch(error => alert(error.message));
 }
 </script>
