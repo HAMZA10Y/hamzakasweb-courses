@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>My Courses</title>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #F3F4F6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    h1 {
+      color: #1E3A8A;
+      margin-bottom: 40px;
+    }
+    a {
+      text-decoration: none;
+      color: #FFFFFF;
+      background-color: #3B82F6;
+      padding: 15px 35px;
+      margin: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    a:hover {
+      background-color: #2563EB;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue sur mon site de cours</h1>
-  <p>
-    <a href="register.html">Créer un compte</a> |
-    <a href="login.html">Se connecter</a>
-  </p>
+  <h1>Mes cours</h1>
+  <a href="Cours1.pdf" target="_blank">Télécharger Cours 1</a>
+
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_KEY",
+      authDomain: "YOUR_DOMAIN.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_BUCKET",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location = "login.html";
+      }
+    });
+  </script>
 </body>
 </html>
